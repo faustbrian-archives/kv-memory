@@ -8,7 +8,11 @@ import { IKeyValueStoreSync } from "@keeveestore/keeveestore";
  */
 export class StoreSync<K, T> implements IKeyValueStoreSync<K, T> {
 	// @ts-ignore
-	private store: { [key: K]: T } = {};
+	private constructor(private store: { [key: K]: T }) {}
+
+	public static new<K, T>(): StoreSync<K, T> {
+		return new StoreSync<K, T>({});
+	}
 
 	public all(): [K, T][] {
 		// @ts-ignore
